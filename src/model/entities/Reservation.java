@@ -42,10 +42,19 @@ public class Reservation {
         
     }
     public void updateDates(Date checkIn, Date checkOut){
+            Date now = new Date();
+            if (checkIn.before(now) || checkOut.before(now)){
+                throw new IllegalArgumentException("Reservation dates for update must be future dates");
+            }    
+            if (!checkOut.after(checkIn)) {
+                throw new IllegalArgumentException("Check-out date must be after check-in date");
+            }
              this.checkIn = checkIn;
-             this.checkOut = checkOut;                            
-    }
-
+             this.checkOut = checkOut; 
+             
+            }
+    
+  
     @Override
     public String toString() {
         return "Room "
@@ -62,6 +71,4 @@ public class Reservation {
     }
     
    
-    
-    
-}
+}   
